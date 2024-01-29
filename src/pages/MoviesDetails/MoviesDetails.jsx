@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchDetailsMovie } from '../../service/API';
 
@@ -19,6 +19,7 @@ const MoviesDetails = () => {
   const location = useLocation();
   const backRef = useRef(location.state?.from ?? '/movies');
   console.log(location);
+
   useEffect(() => {
     fetchDetailsMovie(movieId).then(setMoviesDetails);
   }, [movieId]);
@@ -66,9 +67,9 @@ const MoviesDetails = () => {
         </li>
       </Container>
 
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
-      <Outlet />
-      {/* </Suspense> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

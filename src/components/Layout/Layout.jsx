@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Container, Header, Link, Wrapper } from './Layout.styled';
+import { Suspense } from 'react';
 
 const Layout = () => {
   return (
@@ -11,7 +12,9 @@ const Layout = () => {
             <Link to="/movies">Movies</Link>
           </nav>
         </Header>
-        <Outlet />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
       </Container>
     </Wrapper>
   );

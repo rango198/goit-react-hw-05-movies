@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Outlet, useLocation } from 'react-router-dom';
 import { List, Li, Links, Card, Img } from './MoviesList.styled';
+import { Suspense } from 'react';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
@@ -31,7 +32,9 @@ const MoviesList = ({ movies }) => {
           );
         })}
       </List>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

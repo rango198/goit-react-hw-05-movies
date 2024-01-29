@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchSearchMovies } from '../service/API';
+
 import SearchForm from 'components/SearchForm/SearchForm';
 import MoviesList from 'components/MoviesList/MoviesList';
 
 import Loader from 'components/Loader/Loader';
+import { fetchSearchMovies } from 'service/API';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,6 +36,7 @@ const Movies = () => {
     <>
       {error && <h2>{error.message}</h2>}
       <SearchForm value={moviesName} onSearch={handleOnSubmit} />
+
       {movies.length > 0 && <MoviesList movies={movies} />}
       {loading && <Loader />}
     </>
