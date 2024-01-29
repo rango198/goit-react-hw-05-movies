@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// Link
 import Layout from './Layout/Layout';
 import Home from 'pages/Home';
 import Movies from 'pages/Movies';
@@ -13,7 +12,9 @@ import Reviews from './Reviews/Reviews';
 
 // const Home = lazy(() => import('../pages/Home'));
 // const Movies = lazy(() => import('../pages/Movies'));
-// const MoviesDetails = lazy(() => import('../pages/MoviesDetails/MoviesDetails'));
+// const MoviesDetails = lazy(() =>
+//   import('../pages/MoviesDetails/MoviesDetails')
+// );
 // const Cast = lazy(() => import('./Cast/Cast'));
 // const Reviews = lazy(() => import('./Reviews/Reviews'));
 

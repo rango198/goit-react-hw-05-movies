@@ -9,6 +9,8 @@ import {
   Links,
   WrapContainer,
 } from './MoviesDetails.styled';
+const defaultImg =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
 const MoviesDetails = () => {
   const [moviesDetails, setMoviesDetails] = useState({});
@@ -16,7 +18,7 @@ const MoviesDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const backRef = useRef(location.state?.from ?? '/movies');
-
+  console.log(location);
   useEffect(() => {
     fetchDetailsMovie(movieId).then(setMoviesDetails);
   }, [movieId]);
@@ -31,7 +33,11 @@ const MoviesDetails = () => {
       <Wrap>
         <WrapContainer>
           <Img
-            src={`https://image.tmdb.org/t/p/w154${poster_path}`}
+            src={
+              poster_path
+                ? `http://image.tmdb.org/t/p/w342${poster_path}`
+                : defaultImg
+            }
             alt={title}
           />
         </WrapContainer>
@@ -60,7 +66,9 @@ const MoviesDetails = () => {
         </li>
       </Container>
 
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
       <Outlet />
+      {/* </Suspense> */}
     </>
   );
 };
