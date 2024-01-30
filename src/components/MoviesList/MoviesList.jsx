@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Outlet, useLocation } from 'react-router-dom';
 import { List, Li, Links, Card, Img } from './MoviesList.styled';
 import { Suspense } from 'react';
@@ -37,15 +36,6 @@ const MoviesList = ({ movies }) => {
       </Suspense>
     </>
   );
-};
-
-MoviesList.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default MoviesList;

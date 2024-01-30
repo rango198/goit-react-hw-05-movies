@@ -5,13 +5,16 @@ import SearchForm from 'components/SearchForm/SearchForm';
 import MoviesList from 'components/MoviesList/MoviesList';
 
 import Loader from 'components/Loader/Loader';
-import { fetchSearchMovies } from 'service/API';
+import { fetchFilters, fetchSearchMovies } from 'service/API';
+import FilterGenres from 'components/FilterGenre/FilterGenre';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   const moviesName = searchParams.get('query') ?? '';
 
@@ -32,11 +35,23 @@ const Movies = () => {
       .finally(() => setLoading(false));
   }, [moviesName]);
 
+  useEffect(() => {
+    if (!selectedGenre) return;
+
+    setLoading(true);
+    fetchFilters(selectedGenre)
+      .then(results => {
+        setMovies(results);
+      })
+      .catch(error => setError(error))
+      .finally(() => setLoading(false));
+  }, [selectedGenre]);
+
   return (
     <>
       {error && <h2>{error.message}</h2>}
       <SearchForm value={moviesName} onSearch={handleOnSubmit} />
-
+      <FilterGenres onSelect={setSelectedGenre} />
       {movies.length > 0 && <MoviesList movies={movies} />}
       {loading && <Loader />}
     </>

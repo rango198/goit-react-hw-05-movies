@@ -29,3 +29,22 @@ export const fetchReviews = async movieId => {
   const res = await axios.get(`movie/${movieId}/reviews?${params}&page=1`);
   return res.data;
 };
+// ///////////////////////////
+export const fetchGenresMovies = async id => {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    id: id,
+  });
+  const { data } = await axios.get('/genre/movie/list', { params });
+  return data.genres;
+};
+
+export const fetchFilters = async genre => {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    with_genres: genre,
+  });
+
+  const { data } = await axios.get('/discover/movie', { params });
+  return data.results;
+};
